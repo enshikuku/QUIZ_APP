@@ -19,6 +19,13 @@
     font-family: Montserrat-Regular;
 }
 
+.error {
+    background-color: #f00;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
 #login-form, #signup-form {
     height: 100vh;
     display: grid;
@@ -52,9 +59,12 @@
     margin: 0 auto;
     border-radius: 5px;
     font-size: 23px;
+    transition: .4s;
 }
 #login-form input[type='submit']:hover, #signup-form input[type='submit']:hover {
     cursor: pointer;
+    letter-spacing: 4px;
+    transition: .4s;
 }
 #login-form a, #signup-form a {
     text-decoration: none;
@@ -66,3 +76,4 @@
     letter-spacing: 2px;
     transition: .4s;
 }
+
