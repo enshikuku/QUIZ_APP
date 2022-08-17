@@ -1,4 +1,5 @@
 import express from 'express'
+import bcrypt from 'bcrypt'
 
 const app = express()
 
@@ -20,6 +21,11 @@ const users = [
         name: 'tree', 
         email: 're@shi.com', 
         password: '6789054321' 
+    },
+    {
+        name:"emma",
+        email:"ttr@tt.t",
+        password:"$2b$10$9Xfls3qDpn2pK9MtiHTsmOht42d.UGz.1sgH2CWWWudT03W59iRhW"
     }
 ]
 // Landing page
@@ -28,8 +34,34 @@ app.get('/', (req, res) => {
 })
 // Display Login Page
 app.get('/login', (req, res) => {
-    res.render('login')
+    const user = {
+        email : '',
+        password : ''
+    }
+    res.render('login', {error:false, user: user})
 })
+// process login page
+app.post('/login', (req, res) => {
+    const user = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    let userExists = users.find(account => account.email === user.email)
+    if (userExists) {
+        bcrypt.compare(user.password, userExists.password, (error, passwordMatches) => {
+            if (passwordMatches) {
+                res.send('Grant Access!@')
+            } else {
+                let message = 'Incorrect password!'
+                res.render('login', {error: true, message: message, user: user})
+            }
+        })
+    } else {
+        let message = 'Account does not exist please create one'
+        res.render('login', {error: true, message: message, user: user})
+    }
+})
+
 // Display Signup Page
 app.get('/signup', (req, res) => {
     const user = {
@@ -49,6 +81,18 @@ app.post('/signup', (req, res) => {
         confirmPassword: req.body.confirmPassword
     }
     if (user.password === user.confirmPassword) {
+        // check if user exists
+        let userExists = users.find(account => account.email === user.email)
+        if (userExists) {
+            let message = 'Account already exists with the email provided!'
+            res.render('signup', {error: true, message: message, user: user})
+        } else {
+            // create account
+            bcrypt.hash(user.password, 10, (error, hash) => {
+                user.password = hash
+                res.send(user)
+            })
+        }
         
     } else {
         
@@ -57,9 +101,6 @@ app.post('/signup', (req, res) => {
 
     }
     
-
-    console.log(user)
-    res.send('User account succesfully created')
 })
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {
