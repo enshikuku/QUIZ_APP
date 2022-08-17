@@ -57,13 +57,13 @@
     letter-spacing: 2px;
     width: fit-content;
     margin: 0 auto;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 23px;
     transition: .4s;
 }
 #login-form input[type='submit']:hover, #signup-form input[type='submit']:hover {
     cursor: pointer;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
     transition: .4s;
 }
 #login-form a, #signup-form a {
@@ -74,6 +74,6 @@
 }
 #login-form a:hover, #signup-form a:hover {
     letter-spacing: 2px;
-    transition: .4s;
+    transition: .5s;
 }
 
