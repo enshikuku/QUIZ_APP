@@ -1,6 +1,7 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
 import mysql from 'mysql'
+import session from 'express-session'
 
 const app = express()
 const connection = mysql.createConnection({
@@ -13,10 +14,36 @@ const connection = mysql.createConnection({
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: false}))
+// prepare to use session
+app.use(session({
+    secret: 'maswali',
+    saveUninitialized: false,
+    resave: true
+}))
+// continue to check if user is loged in
+app.use((req, res, next) => {
+    if (req.session.userID === undefined) {
+        res.locals.isLogedIn = false
+        res.locals.username = 'Guest'
+    } else {
+        console.log('you are logged in')
+        res.locals.username = req.session.username
+        res.locals.isLogedIn = true
 
+    }
+    next()
+} )
 // Landing page
 app.get('/', (req, res) => {
     res.render('index')
+})
+// dashboard
+app.get('/dashboard', (req, res) => {
+    if (res.locals.isLogedIn) {
+        res.render('dashboard')
+    } else {
+        res.redirect('/login')
+    }
 })
 // Display Login Page
 app.get('/login', (req, res) => {
@@ -39,7 +66,9 @@ app.post('/login', (req, res) => {
             if (results.length > 0) {
                 bcrypt.compare(user.password, results[0].password, (error, passwordMatches) => {
                     if (passwordMatches) {
-                        res.send('Grant Access!@')
+                        req.session.userID = results[0].s_id
+                        req.session.username = results[0].name.split(' ')[0]
+                        res.redirect('/dashboard')
                     } else {
                         let message = 'Incorrect password!'
                         res.render('login', {error: true, message: message, user: user})
@@ -106,6 +135,13 @@ app.post('/signup', (req, res) => {
 
     }
     
+})
+// logout functionality
+app.get('/logout', (req, res) => {
+    // kill the logged in session
+    req.session.destroy(() =>{
+        res.redirect('/')
+    })
 })
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {
