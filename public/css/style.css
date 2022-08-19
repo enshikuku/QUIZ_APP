@@ -18,6 +18,10 @@
     box-sizing: border-box;
     font-family: Montserrat-Regular;
 }
+.container {
+    padding-left: 150px;
+    padding-right: 150px;
+}
 
 .error {
     background-color: #f00;
@@ -26,6 +30,29 @@
     text-align: center;
     padding: 5px;
 }
+header {
+    background-color: #EAEFF2;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header a {
+    text-decoration: none;
+    color: #00e0d4;
+}
+nav li {
+    display: inline;
+    padding: 10px;
+    padding-bottom: 0;
+    font-size: 18px;
+    transition: .2s;
+}
+nav li:hover {
+    transition: .2s;
+    border-bottom: 2px solid #00e0d4;
+}
+
 #login-form, #signup-form {
     height: 100vh;
     display: grid;
@@ -76,4 +103,3 @@
     letter-spacing: 2px;
     transition: .5s;
 }
-
