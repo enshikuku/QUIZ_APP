@@ -18,6 +18,11 @@
                 <label for="">Gender</label>
 
                 <select name="gender" id="">
+
+                    <% if(profile.gender) { %>
+                        <option value="<%= profile.gender %>" selected><%= profile.gender %></option>
+                    <% } %>
+
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -27,20 +32,20 @@
 
             <div class="form-input">
                 <label for="">Phone Number</label>
-                <input type="text" name="contacts" id="">
+                <input type="text" name="contacts" id="" value="<%= profile.contacts %>">
             </div>
 
             <div class="form-input">
                 <label for="">Date of Birth</label>
-                <input type="date" name="dob" id="">
+                <input type="date" name="dob" id="" value="<%= profile.dob %>">
             </div>
 
             <div class="form-input">
-                <label for="">Profile Piccture</label>
+                <label for="">Profile Picture</label>
                 <input type="file" name="picture" id="">
             </div>
 
-            <input type="submit" value="Update Profile">
+            <input type="submit" value="Update Profile"><br> <a href="/profile">Cancel</a>
         </form>
     </main>
 <%- include('partials/footer') %>
