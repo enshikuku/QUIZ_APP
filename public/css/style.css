@@ -103,3 +103,72 @@ nav li:hover {
     letter-spacing: 2px;
     transition: .5s;
 }
+
+#profile {
+    text-align: center;
+}
+#profile img {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    margin-top: 40px;
+}
+#profile a {
+    text-decoration: none;
+    background-color: #008000;
+    color: #fff;
+    letter-spacing: 3px;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: .4s;
+}
+#profile a:hover {
+    letter-spacing: 5px;
+    transition: .4s;
+}
+#edit-profile form {
+    margin-top: 15px;
+}
+#edit-profile .form-input {
+    display: flex;
+    margin-bottom: 10px;
+}
+#edit-profile .form-input * {
+    font-size: 20px;
+}
+#edit-profile .form-input label {
+    width: 20%;
+}
+#edit-profile input[type='submit'] {
+    border: 1px solid  #008000;
+    text-decoration: none;
+    background-color: #008000;
+    color: #fff;
+    letter-spacing: 3px;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: .4s;
+}
+#edit-profile input[type='submit']:hover {
+    letter-spacing: 5px;
+    cursor: pointer;
+}
+#edit-profile a {
+    position: relative;
+    top: 20px;
+    border: 1px solid  red;
+    text-decoration: none;
+    background-color: red;
+    color: #fff;
+    letter-spacing: 3px;
+    width: max-content;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: .4s;
+}
+#edit-profile a:hover {
+    letter-spacing: 6px;
+}
