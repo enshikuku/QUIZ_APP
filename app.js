@@ -47,6 +47,10 @@ app.get('/dashboard', (req, res) => {
         res.redirect('/login')
     }
 })
+// questions
+app.get('/quiz', (req, res) => {
+    res.render('quiz')
+})
 app.get('/profile', (req, res) => {
     if (res.locals.isLogedIn) {
         let sql = 'SELECT * FROM student WHERE s_id = ?'
