@@ -173,3 +173,21 @@ nav li:hover {
 #edit-profile a:hover {
     letter-spacing: 6px;
 }
+#questions {
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+#questions .question {
+    font-family: Montserrat-Bold;
+    font-size: 23px;
+    margin: 10px 0;
+}
+#questions .choice {
+    background-color: #e7e9eb;
+    padding: 8px;
+    margin-bottom: 2px;
+    font-size: 17px;
+}
+#questions .choice:hover {
+    background-color: #c9cacb;
+}
