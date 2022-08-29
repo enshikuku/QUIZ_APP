@@ -1,7 +1,16 @@
 <%- include('partials/header') %>
     <%- include('partials/nav') %>
-    <main id="dashboard">
+    <main id="dashboard" class="container">
         <h1>Welcome, <%= locals.username %></h1>
+        <div>
+            <h1><a href="/quiz">SQL</a></h1>
+        </div>
     </main>
+    <script>
+        let div = document.querySelector('div')
+        div.addEventListener('click', () => {
+            location.href = div.firstElementChild.firstElementChild.href
+        })
+    </script>
 
 <%- include('partials/footer') %>
