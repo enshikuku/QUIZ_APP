@@ -49,7 +49,54 @@ app.get('/dashboard', (req, res) => {
 })
 // questions
 app.get('/quiz', (req, res) => {
-    res.render('quiz')
+    if (res.locals.isLogedIn) {
+        res.render('quiz')
+    } else {
+        res.redirect('/login')
+    }
+})
+app.get('/results', (req, res) => {
+    if (res.locals.isLogedIn) {
+        let sql = 'SELECT * FROM score WHERE s_id_fk = ?'
+        connection.query(
+            sql,
+            [req.session.userID],
+            (error, results) => {
+                res.render('results', {results: results[0]})
+            }
+        )
+    } else {
+        res.redirect('/login')
+    }
+})
+app.post('/quiz', (req, res) => {
+    const choices = []
+    const answers = req.body.markingScheme.split(',')
+
+    for(let i = 1; i <= 10; i++){
+        let choice = {
+            id: i,
+            yourAnswer: req.body[`q${i}`],
+            correctAnswer: answers[i - 1],
+            score: 0
+        }
+        if (choice.yourAnswer === choice.correctAnswer) {
+            choice.score = 1
+        }
+        choices.push(choice)
+    }
+    let sql = 'INSERT INTO score (s_id_fk, response, results) VALUES (?, JSON_ARRAY(?), ?)'
+    connection.query(
+        sql, 
+        [
+            req.session.userID,
+            [...choices.map(choice => choice.yourAnswer)],
+            choices.map(choice => choice.score).reduce((a,b) => a + b)
+        ], 
+        (error, results) => {
+            res.redirect('/results')             
+        }
+    )
 })
 app.get('/profile', (req, res) => {
     if (res.locals.isLogedIn) {
