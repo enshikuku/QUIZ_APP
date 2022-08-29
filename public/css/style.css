@@ -182,6 +182,9 @@ nav li:hover {
     font-size: 23px;
     margin: 10px 0;
 }
+#questions .question:hover {
+    cursor: default;
+}
 #questions .choice {
     background-color: #e7e9eb;
     padding: 8px;
@@ -190,4 +193,36 @@ nav li:hover {
 }
 #questions .choice:hover {
     background-color: #c9cacb;
+    cursor: pointer;
+}
+#questions input[type="submit"] {
+    background-color: #00E0D4;
+    border: 1px solid #00E0D4;
+    font-family: Montserrat-Bold;
+    letter-spacing: 2px;
+    font-size: 25px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+#dashboard div {
+    height: 200px;
+    width: 200px;
+    background-color: #e7e9eb;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    transition: .4s;
+}
+#dashboard div:hover {
+    cursor: pointer;
+    letter-spacing: 3px;
+    transition: .7s;
+    font-weight: bold;
+}
+#dashboard a {
+    text-decoration: none;
+    color: #05445e;
 }
