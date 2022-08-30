@@ -62,7 +62,13 @@ app.get('/results', (req, res) => {
             sql,
             [req.session.userID],
             (error, results) => {
-                res.render('results', {results: results[0]})
+                let result = results[0]
+                connection.query(
+                    'SELECT * FROM question',
+                    (error, results) => {
+                        res.render('results', {results: result, questions: results})
+                    }
+                )
             }
         )
     } else {
