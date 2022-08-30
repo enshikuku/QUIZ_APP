@@ -50,7 +50,7 @@ const questions = [
             "ADD NEW",
             "ADD RECORD"
         ],
-        answer: ""
+        answer: "INSERT INTO"
     },
     {
         id: 6,
