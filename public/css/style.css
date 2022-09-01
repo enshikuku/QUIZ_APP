@@ -103,7 +103,9 @@ nav li:hover {
     letter-spacing: 2px;
     transition: .5s;
 }
-
+#login-form #login-admin {
+    color: #00E0D4;
+}
 #profile {
     text-align: center;
 }
