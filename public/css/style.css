@@ -226,3 +226,45 @@ nav li:hover {
     text-decoration: none;
     color: #05445e;
 }
+
+#results .correct-answer {
+    color: #008000;
+    font-family: Montserrat-Bold;
+}
+#results .wrong-answer {
+    color: #800000;
+    font-family: Montserrat-Bold;
+}
+#admin-panel .student * {
+    width: 15%;
+}
+#admin-panel .student {
+    display: flex;
+    margin: 5px 0;
+    background-color: #e7e9eb;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    align-items: center;
+    font-size: 25px;
+    justify-content: space-evenly;
+}
+#admin-panel .pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+#admin-panel .pass {
+    background-color: #008000;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: max-content;
+}
+#admin-panel .fail {
+    background-color: #db9f63;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: max-content;
+}
