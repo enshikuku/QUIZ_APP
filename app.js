@@ -225,6 +225,32 @@ app.get('/admin', (req, res)=> {
         }
     )
 })
+
+// admin login
+app.get('/admin/login', (req, res) => {
+    const admin = {
+        email: '',
+        password: ''
+    }
+    res.render('admin-login', {error: false, admin:admin})
+})
+app.post('/admin/login', (req, res) => {
+    const admin = {
+        email: req.body.adminEmail,
+        password: req.body.adminPassword
+    }
+    if (admin.email === 'admin@test.com') {
+        if (admin.password === 'test1234') {
+            res.redirect('/admin')            
+        } else {
+            let message = 'Incorrect Password'
+            res.render('admin-login', {error: true, message: message, admin:admin})
+        }        
+    } else {
+        let message = 'Unknown Email address'
+        res.render('admin-login', {error: true, message: message, admin:admin})
+    }
+})
 // Display Signup Page
 app.get('/signup', (req, res) => {
     const user = {
