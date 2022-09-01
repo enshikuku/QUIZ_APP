@@ -7,6 +7,16 @@
             <div class="question">
                 <h1><%= question.question %></h1>
                 <div>
+                    <% JSON.parse(question.choices).forEach(choice => { %>
+                        <% if(choice === question.answer) { %>                
+                            <p class="choice correct-answer"><%= choice %></p>
+                        <% } else if (JSON.parse(results.response).includes(choice) && choice !== question.answer) { %>
+                            <p class="choice wrong-answer"><%= choice %></p>
+                        <% } else { %>
+                            <p class="choice"><%= choice %></p>                            
+                        <% } %>
+
+                    <% }) %>
                 </div>
             </div>
         <% }) %>
