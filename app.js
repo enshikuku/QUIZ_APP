@@ -28,7 +28,6 @@ app.use((req, res, next) => {
         res.locals.isLogedIn = false
         res.locals.username = 'Guest'
     } else {
-        console.log('you are logged in')
         res.locals.username = req.session.username
         res.locals.isLogedIn = true
 
@@ -50,7 +49,19 @@ app.get('/dashboard', (req, res) => {
 // questions
 app.get('/quiz', (req, res) => {
     if (res.locals.isLogedIn) {
-        res.render('quiz')
+        // check if quiz has been done
+        let sql = 'SELECT * FROM score WHERE s_id_fk = ?'
+        connection.query(
+            sql,
+            [req.session.userID],
+            (error, results) => {
+                if (results.length > 0) {
+                    res.redirect('/results')                    
+                } else {
+                    res.render('quiz')
+                }
+            }
+        )
     } else {
         res.redirect('/login')
     }
@@ -204,7 +215,16 @@ app.post('/login', (req, res) => {
         }
     )
 })
-
+// admin panel
+app.get('/admin', (req, res)=> {
+    let sql = 'SELECT s_id, gender, name, picture, results FROM student JOIN score ON s_id = s_id_fk'
+    connection.query(
+        sql,
+        (error, results) => {
+            res.render('admin', {students: results})
+        }
+    )
+})
 // Display Signup Page
 app.get('/signup', (req, res) => {
     const user = {
